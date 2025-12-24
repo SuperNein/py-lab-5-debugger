@@ -87,8 +87,8 @@ class IndexDict:
     def __generate_dict(self) -> dict[str, BookCollection]:
         """Generate actual dictionary of collection"""
         res: dict[str, BookCollection] = dict()
-        # books = self.__items.copy()
-        books = self.__items
+        # books = self.__items  # Bug 3
+        books = self.__items.copy()
         while books:
             book = books.pop()
             key = getattr(book, self.index)
