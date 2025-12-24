@@ -43,6 +43,7 @@ class Simulation:
     def remove_book(self, book: Book | None = None) -> str:
         if book is None:
             book = self._choose_random_book()
+        # if book in self._library: # Bug 2
         if book not in self._library:
             raise ValueError(f"Trying to remove nonexistent {book}")
         self._library.remove(book)

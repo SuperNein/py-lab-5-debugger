@@ -26,3 +26,32 @@
 **Доказательства:**
 - [Variables](./screenshots/bug_1_variables.png)
 - [Console](./screenshots/bug_1_console.png)
+
+
+## Ошибка 2 - неверное логичесĸое условие
+
+**Место:**
+`src/services/simulation.py`, метод `Simulation.remove_book`
+
+**Симптом:**
+При попытке удалить существующую книгу из библиотеки вызывается неожидаемая `ValueError`.
+
+**Как воспроизвести:**
+Запустить симуляцию с `seed=1` и `step=5`.
+
+**Отладка:**
+- Установлен breakpoint на условие `if book in self._library:`.
+- В отладчике видно, что удаляемая книга в коллекции присутствует.
+
+**Причина:**
+Упущенный `not` при проверке вложений.
+
+**Исправление:**
+Заменено на: `if book not in self._library:`.
+
+**Проверка:**
+Поведение симуляции соответствует ожидаемому.
+
+**Доказательства:**
+- [Variables](./screenshots/bug_2_variables.png)
+- [Console](./screenshots/bug_2_console_logs.png)
