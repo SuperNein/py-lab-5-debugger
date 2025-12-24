@@ -98,6 +98,7 @@ class Simulation:
         act: Callable[[Any], str]
         kwargs: dict[str, Any]
 
+        # while step <= steps:  # Bug 1
         while step < steps:
             act, kwargs = self._choose_random_action()
             try:
