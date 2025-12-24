@@ -54,4 +54,34 @@
 
 **Доказательства:**
 - [Variables](./screenshots/bug_2_variables.png)
-- [Console](./screenshots/bug_2_console_logs.png)
+- [Console and logs](./screenshots/bug_2_console_logs.png)
+
+
+## Ошибка 3 - изменение пользовательсĸой ĸоллеĸции во время итерации
+
+**Место:**
+`src/services/book_collections.py`, метод `IndexDict.__generate_dict`
+
+**Симптом:**
+При попытке поменять книгу вызывается ошибка `KeyError`.
+
+**Как воспроизвести:**
+Запустить симуляцию с `seed=1` и `step=5`.
+
+**Отладка:**
+- Установлен breakpoint на начало цикла `while books:`.
+- В отладчике видно, что изменения локальной коллекции `books` при итерации изменяют глобальный атрибут `self.__items`.
+
+**Причина:**
+Не создается копия глобальной коллекции `self.__items` для изменения локально.
+
+**Исправление:**
+Строка `books = self.__items` заменена на: `books = self.__items.copy()`.
+
+**Проверка:**
+Поведение симуляции соответствует ожидаемому.
+
+**Доказательства:**
+- [Variables before](./screenshots/bug_3_variables_before.png)
+- [Variables after](./screenshots/bug_3_variables_after.png)
+- [Console and logs](./screenshots/bug_3_console_logs.png)
