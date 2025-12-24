@@ -85,3 +85,36 @@
 - [Variables before](./screenshots/bug_3_variables_before.png)
 - [Variables after](./screenshots/bug_3_variables_after.png)
 - [Console and logs](./screenshots/bug_3_console_logs.png)
+
+
+## Ошибка 4 - перепутанные аргументы или поля объеĸта
+
+**Место:**
+`src/services/simulation.py`, метод `Simulation.switch_book`
+
+**Симптом:**
+При попытке поменять книгу вызывается ошибка `KeyError`.
+
+**Как воспроизвести:**
+Запустить симуляцию с `seed=1` и `step=5`.
+
+**Отладка:**
+- Установлен breakpoint на `books = self.find(book.isbn, book.author, book.year)` 
+в методе `Library.switch_book` в `src/services/library.py`.
+- В отладчике видно, что аргумент `book`, переданный в метод библиотеки, 
+отличается от ожидаемого аргумента `old_book` из метода симуляции.
+
+**Причина:**
+При передачи аргументов в метод они были перепутаны местами.
+
+**Исправление:**
+Строка `self._library.switch_book(new_book, old_book)` 
+заменена на: `self._library.switch_book(old_book, new_book)`.
+
+**Проверка:**
+Поведение симуляции соответствует ожидаемому.
+
+**Доказательства:**
+- [Variables in method](./screenshots/bug_4_variables_in.png)
+- [Variables out of method](./screenshots/bug_4_variables_out.png)
+- [Console and logs](./screenshots/bug_4_console_logs.png)

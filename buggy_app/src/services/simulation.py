@@ -86,6 +86,7 @@ class Simulation:
             new_book = generate_random_book()
         if (not isinstance(old_book, Book)) or (not isinstance(new_book, Book)):
             raise TypeError("Book element expected")
+        # self._library.switch_book(new_book, old_book) # Bug 4
         self._library.switch_book(old_book, new_book)
         return f"Switched {old_book} to {new_book}"
 
