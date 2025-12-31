@@ -149,4 +149,4 @@
 **Доказательства:**
 - [Variables before](./screenshots/bug_5_variables_before.png)
 - [Variables after](./screenshots/bug_5_variables_after.png)
-- [Console and logs](./screenshots/bug_5_console_logs.png)
+- [Console](./screenshots/bug_5_console.png)
